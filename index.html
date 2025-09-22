@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>As-Samiy | O'quv Markazi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(26, 32, 44, 0.6), rgba(26, 32, 44, 0.6)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .cta-button {
+            background-image: linear-gradient(to right, #10b981, #16a34a);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .hero-cta-button {
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            background-color: rgba(16, 185, 129, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .hero-cta-button:hover {
+            background-color: rgba(16, 185, 129, 0.4);
+            border-color: white;
+            box-shadow: 0 0 20px rgba(52, 211, 153, 0.5), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .nav-link {
+            padding: 8px 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border-radius: 9999px;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .professional-course-card {
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,.05),0 4px 6px -4px rgba(0,0,0,.05);
+        }
+        .professional-course-card:hover {
+             transform: translateY(-8px);
+             box-shadow: 0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);
+        }
+        .professional-course-card .card-header { padding: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+        .professional-course-card .card-icon { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; }
+        .professional-course-card .card-icon svg { width: 28px; height: 28px; color: white; }
+        .professional-course-card .card-title { font-size: 1.5rem; font-weight: 800; }
+        .professional-course-card .card-body { padding: 0 1.5rem 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .professional-course-card .features-list { list-style: none; padding: 0; margin: 0; space-y: 0.75rem; flex-grow: 1;}
+        .professional-course-card .features-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; line-height: 1.6; }
+        .professional-course-card .features-list svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; }
+        .professional-course-card .card-button { border: none; width: 100%; font-weight: 600; padding: 0.75rem 1rem; border-radius: 0.75rem; transition: all 0.3s ease; margin-top: 1.5rem; text-align: center; color: white; }
+        
+        .theme-blue .card-header { background-color: #3b82f6; color: white; }
+        .theme-blue .card-icon { background-color: rgba(255, 255, 255, 0.1); }
+        .theme-blue .card-button { background-color: #3b82f6; }
+        .theme-blue .card-button:hover { background-color: #2563eb; }
+        .theme-blue .features-list svg { color: #3b82f6; }
+
+        .theme-green .card-header { background-color: #16a34a; color: white; }
+        .theme-green .card-icon { background-color: rgba(255, 255, 255, 0.1); }
+        .theme-green .card-button { background-color: #16a34a; }
+        .theme-green .card-button:hover { background-color: #15803d; }
+        .theme-green .features-list svg { color: #16a34a; }
+        
+        .theme-orange .card-header { background-color: #f97316; color: white; }
+        .theme-orange .card-icon { background-color: rgba(255, 255, 255, 0.1); }
+        .theme-orange .card-button { background-color: #f97316; }
+        .theme-orange .card-button:hover { background-color: #ea580c; }
+        .theme-orange .features-list svg { color: #f97316; }
+
+        .teacher-card-new { transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,.07),0 4px 6px -4px rgba(0,0,0,.07); }
+        .teacher-card-new:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1), 0 0 30px rgba(22, 163, 74, 0.2); }
+        .modal-overlay { transition: opacity 0.3s ease; }
+        .modal-content { transition: transform 0.3s ease, opacity 0.3s ease; white-space: pre-wrap; }
+        .faq-item summary { cursor: pointer; outline: none; display: flex; justify-content: space-between; align-items: center; }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item .icon { transition: transform 0.3s ease; }
+        .faq-item[open] .icon { transform: rotate(45deg); }
+        .faq-item .answer { animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        #back-to-top-btn { transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; }
+        .form-error { border-color: #ef4444; }
+        .error-text { color: #ef4444; font-size: 0.875rem; }
+        .logo-gradient {
+            background-image: linear-gradient(to right, #10b981, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .cta-banner {
+            background-image: linear-gradient(rgba(26, 32, 44, 0.7), rgba(26, 32, 44, 0.7)), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2084&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-sm shadow-md sticky top-0 z-50 border-b border-gray-200">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-800 flex-shrink-0">
+                As-<span class="logo-gradient">Samiy</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-2">
+                <a href="#courses" class="nav-link text-gray-700 hover:bg-gray-100">Kurslar</a>
+                <a href="#about" class="nav-link text-gray-700 hover:bg-gray-100">Biz haqimizda</a>
+                <a href="#testimonials" class="nav-link text-gray-700 hover:bg-gray-100">Fikrlar</a>
+                <a href="#teachers" class="nav-link text-gray-700 hover:bg-gray-100">O'qituvchilar</a>
+                <a href="#faq" class="nav-link text-gray-700 hover:bg-gray-100">FAQ</a>
+                <a href="#contact" class="text-white font-semibold py-2 px-5 rounded-full cta-button whitespace-nowrap">
+                    Murojaat qilish
+                </a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-white">
+            <a href="#courses" class="block py-2 text-gray-600 hover:text-green-600">Kurslar</a>
+            <a href="#about" class="block py-2 text-gray-600 hover:text-green-600">Biz haqimizda</a>
+            <a href="#testimonials" class="block py-2 text-gray-600 hover:text-green-600">Fikrlar</a>
+            <a href="#teachers" class="block py-2 text-gray-600 hover:text-green-600">O'qituvchilar</a>
+            <a href="#faq" class="block py-2 text-gray-600 hover:text-green-600">FAQ</a>
+            <a href="#contact" class="mt-4 block text-white text-center font-semibold py-2 px-5 rounded-full cta-button">
+                Murojaat qilish
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg text-white py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-on-scroll is-visible" style="transition-delay: 100ms;">
+                    As-Samiy bilan yorqin kelajak sari!
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8 animate-on-scroll is-visible" style="transition-delay: 300ms;">
+                    Eng malakali ustozlardan zamonaviy metodlar asosida bilim oling va o'z maqsadingizga erishing.
+                </p>
+                <div class="flex items-center justify-center">
+                     <a href="#courses" class="font-bold py-3 px-8 rounded-full text-lg animate-on-scroll is-visible text-white hero-cta-button" style="transition-delay: 500ms;">
+                        Kurslarni ko'rish
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="animate-on-scroll">
+                        <h3 class="text-4xl font-extrabold text-green-600">7+</h3>
+                        <p class="text-gray-600 mt-2 font-medium">Yillik Tajriba</p>
+                    </div>
+                    <div class="animate-on-scroll" style="transition-delay: 100ms;">
+                        <h3 class="text-4xl font-extrabold text-green-600">1000+</h3>
+                        <p class="text-gray-600 mt-2 font-medium">Bitiruvchilar</p>
+                    </div>
+                    <div class="animate-on-scroll" style="transition-delay: 200ms;">
+                        <h3 class="text-4xl font-extrabold text-green-600">90%</h3>
+                        <p class="text-gray-600 mt-2 font-medium">Yuqori Natija</p>
+                    </div>
+                    <div class="animate-on-scroll" style="transition-delay: 300ms;">
+                        <h3 class="text-4xl font-extrabold text-green-600">15+</h3>
+                        <p class="text-gray-600 mt-2 font-medium">Malakali Ustozlar</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 animate-on-scroll text-gray-900">Nima uchun aynan <span class="logo-gradient">As-Samiy</span>?</h2>
+                    <p class="text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed animate-on-scroll" style="transition-delay: 150ms;">
+                        Bizning asosiy vazifamiz — har bir o'quvchiga individual yondashuv orqali sifatli ta'lim berish va ularning ichki salohiyatini ochishdir.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Stat Card 1 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl animate-on-scroll" style="transition-delay: 300ms;">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto mb-5">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197m0 0A5.975 5.975 0 0112 13a5.975 5.975 0 013 1.803M15 21a9 9 0 00-5.937-8.818" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Kuchli Jamoa</h3>
+                        <p class="text-gray-600 leading-relaxed text-base">Biz faqat o'z sohasining professionali, xalqaro sertifikatlarga ega ustozlarni jamoamizga qabul qilamiz.</p>
+                    </div>
+                    <!-- Stat Card 2 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl animate-on-scroll" style="transition-delay: 450ms;">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto mb-5">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Samarali Metodika</h3>
+                        <p class="text-gray-600 leading-relaxed text-base">Darslar eng so'nggi xalqaro o'qitish uslublari va interaktiv materiallar yordamida o'tiladi.</p>
+                    </div>
+                    <!-- Stat Card 3 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-200 text-center transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl animate-on-scroll" style="transition-delay: 600ms;">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 text-green-600 mx-auto mb-5">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Aniq Natija</h3>
+                        <p class="text-gray-600 leading-relaxed text-base">Kichik guruhlar va individual yondashuv orqali natijangizni kafolatlaymiz.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Courses Section -->
+        <section id="courses" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 animate-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Bizning kurslarimiz</h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Sizning maqsadingizga mos keladigan eng ommabop va samarali kurslardan birini tanlang.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Card 1: Ingliz Tili -->
+                    <div class="animate-on-scroll professional-course-card theme-blue bg-white border-gray-200">
+                        <div class="card-header"><div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" /></svg></div><h3 class="card-title">Ingliz Tili</h3></div>
+                        <div class="card-body">
+                            <ul class="features-list text-gray-700">
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>4 daraja (Beginner - Intermediate).</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Haftada 3 dars, 80 daqiqadan.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Xalqaro standartlarga mos dasturlar.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Amaliy mashg'ulotlar va o'yinlar.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Qo'shimcha interaktiv mashg'ulotlar.</span></li>
+                            </ul>
+                            <a href="#contact" class="card-button" data-course-id="1">Batafsil</a>
+                        </div>
+                    </div>
+                     <!-- Card 2: Rus Tili -->
+                    <div class="animate-on-scroll professional-course-card theme-orange" style="transition-delay:150ms">
+                        <div class="card-header"><div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg></div><h3 class="card-title">Rus Tili</h3></div>
+                        <div class="card-body">
+                            <ul class="features-list text-gray-700">
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Noldan erkin muloqotgacha.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Haftada 3 dars, 80 daqiqadan.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Malakali mutaxassislar dars beradi.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Amaliy mashg'ulotlar va o'yinlar.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Kundalik hayot uchun kerakli bilimlar.</span></li>
+                            </ul>
+                            <a href="#contact" class="card-button" data-course-id="2">Batafsil</a>
+                        </div>
+                    </div>
+                     <!-- Card 3: Arab Tili -->
+                    <div class="animate-on-scroll professional-course-card theme-green" style="transition-delay:300ms">
+                        <div class="card-header"><div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg></div><h3 class="card-title">Arab Tili</h3></div>
+                        <div class="card-body">
+                            <ul class="features-list text-gray-700">
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>1-3 oyda o'qish va yozishni o'rganish.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>1 yilda mukammal grammatika.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>CEFR B1-C1 darajalariga tayyorlov.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Yuqori darajali yordamchi ustozlar.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Sharqshunos mutaxassislar dars beradi.</span></li>
+                            </ul>
+                            <a href="#contact" class="card-button" data-course-id="3">Batafsil</a>
+                        </div>
+                    </div>
+                     <!-- Card 4: Maktabga Tayyorlov -->
+                    <div class="animate-on-scroll professional-course-card theme-blue" style="transition-delay:450ms">
+                        <div class="card-header"><div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-.07.004-.018.002-.006.001c-.004.001-.007.001-.011.001A18.06 18.06 0 005.634 5.404a18.06 18.06 0 00-1.374.914l-.07-.004-.018-.002-.006-.001a18.01 18.01 0 00-2.022-1.222l.07.004.018.002.006.001c.004-.001.007-.001.011-.001A18.01 18.01 0 0012 5.634a18.01 18.01 0 007.973-1.49l-.07.004-.018.002-.006.001c-.004.001-.007.001-.01.001a18.06 18.06 0 00-2.022 1.222l.07-.004.018-.002.006-.001a18.06 18.06 0 00-1.374-.914c-.896.248-1.783.52-2.658.814-1.579.432-3.235.635-4.942.593z" /></svg></div><h3 class="card-title">Maktabga Tayyorlov</h3></div>
+                        <div class="card-body">
+                           <ul class="features-list text-gray-700">
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>5-7 yoshdagi bolajonlar uchun.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>O'qish, yozish va sanashni o'rgatish.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Mantiqiy fikrlashni rivojlantirish.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Ko'p yillik tajribaga ega pedagoglar.</span></li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg><span>Darslar o'yin tarzida o'tiladi.</span></li>
+                            </ul>
+                            <a href="#contact" class="card-button" data-course-id="4">Batafsil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 cta-banner">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4 animate-on-scroll">O'z kelajagingizni biz bilan quring!</h2>
+                <p class="text-lg text-gray-300 max-w-2xl mx-auto mb-8 animate-on-scroll" style="transition-delay: 150ms;">
+                    Birinchi qadamni bugun tashlang. Bepul konsultatsiyaga yoziling va biz sizga maqsadlaringizga erishishda yordam beramiz.
+                </p>
+                <a href="#contact" class="font-bold py-3 px-8 rounded-full text-lg animate-on-scroll is-visible text-white hero-cta-button" style="transition-delay: 300ms;">
+                    Konsultatsiya Olish
+                </a>
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12 animate-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">O'quvchilarimiz biz haqimizda</h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Bizning eng katta yutug'imiz — bu o'quvchilarimizning ishonchi va ularning natijalari.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-8 rounded-lg shadow-md border animate-on-scroll">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/60x60/e2e8f0/333333?text=UZ" alt="Student photo" class="w-16 h-16 rounded-full mr-4">
+                            <div>
+                                <p class="font-bold text-lg">Umarjonova Zahro</p>
+                                <p class="text-sm text-green-600 font-semibold">CEFR B2</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"As-Samiy'dagi ustozlar yordamida qisqa vaqt ichida CEFR B2 darajasini qo'lga kiritdim. Darslar sifati va muhit a'lo darajada!"</p>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-8 rounded-lg shadow-md border animate-on-scroll" style="transition-delay: 150ms;">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/60x60/e2e8f0/333333?text=RZ" alt="Student photo" class="w-16 h-16 rounded-full mr-4">
+                            <div>
+                                <p class="font-bold text-lg">Rahimova Zebiniso</p>
+                                <p class="text-sm text-green-600 font-semibold">CEFR B2</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"Bu markazda o'qib, nafaqat bilimlarimni oshirdim, balki o'zimga bo'lgan ishonchim ham ortdi. B2 daraja uchun rahmat!"</p>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white p-8 rounded-lg shadow-md border animate-on-scroll" style="transition-delay: 300ms;">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/60x60/e2e8f0/333333?text=SZ" alt="Student photo" class="w-16 h-16 rounded-full mr-4">
+                            <div>
+                                <p class="font-bold text-lg">Shokirova Zahro</p>
+                                <p class="text-sm text-green-600 font-semibold">CEFR B2</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"Ustozlarning individual yondashuvi natijasida B2 darajaga erishdim. As-Samiy jamoasiga o'z minnatdorchiligimni bildiraman!"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teachers Section -->
+        <section id="teachers" class="py-20 bg-white">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-12 animate-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Bizning faxrimiz — ustozlarimiz</h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto text-lg">O'quvchilarimizning yutuqlari zamirida ustozlarimizning mehnati yotadi.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="teacher-card-new bg-white border border-gray-200 p-8 animate-on-scroll">
+                        <h4 class="text-xl font-bold">Koratayeva Dildora</h4>
+                        <p class="text-green-600 font-medium mt-1">Arab tili | CEFR B2</p>
+                        <p class="text-gray-600 mt-4 text-base leading-relaxed">7 yilik tajribaga ega o'z ishing mutaxassisi, o'quvchilar bilan samarali ishlaydigan, darslarni motivatsiyon tarzda utadigan ustozlardan.</p>
+                    </div>
+                     <div class="teacher-card-new bg-white border border-gray-200 p-8 animate-on-scroll" style="transition-delay: 150ms;">
+                        <h4 class="text-xl font-bold">Jamolxonova Kamola</h4>
+                        <p class="text-green-600 font-medium mt-1">Arab tili | CEFR C1</p>
+                        <p class="text-gray-600 mt-4 text-base leading-relaxed">O'z sohasining yetuk mutaxassisi. Arab tilini chuqurlashtirilgan dastur asosida o'rgatadi va har bir o'quvchi bilan individual shug'ullanadi.</p>
+                    </div>
+                    <div class="teacher-card-new bg-white border border-gray-200 p-8 animate-on-scroll" style="transition-delay: 300ms;">
+                        <h4 class="text-xl font-bold">Anvarova Zarina</h4>
+                        <p class="text-green-600 font-medium mt-1">Ingliz tili | CEFR C1</p>
+                        <p class="text-gray-600 mt-4 text-base leading-relaxed">Xalqaro CEFR C1 darajasi sohibi. O'quvchilar bilan tez til topishadigan, zamonaviy metodikalar orqali dars o'tadigan talabchan ustoz.</p>
+                    </div>
+                    <div class="teacher-card-new bg-white border border-gray-200 p-8 animate-on-scroll" style="transition-delay: 450ms;">
+                        <h4 class="text-xl font-bold">Rahmedova Madina</h4>
+                        <p class="text-green-600 font-medium mt-1">Rus tili</p>
+                        <p class="text-gray-600 mt-4 text-base leading-relaxed">Rus tili  bo'yicha mutaxassis. Darslarni qiziqarli va interaktiv tarzda o'tadi, har bir o'quvchiga individual yondashadi.</p>
+                    </div>
+                     <div class="teacher-card-new bg-white border border-gray-200 p-8 animate-on-scroll" style="transition-delay: 600ms;">
+                        <h4 class="text-xl font-bold">Ergashboyeva Sarvinoz</h4>
+                        <p class="text-green-600 font-medium mt-1">Rus tili</p>
+                        <p class="text-gray-600 mt-4 text-base leading-relaxed">Talabalar bilan individual yondashuv orqali yuqori natijalarga erishgan tajribali mutaxassis.</p>
+                    </div>
+                    <div class="teacher-card-new bg-white border border-gray-200 p-8 animate-on-scroll" style="transition-delay: 750ms;">
+                        <h4 class="text-xl font-bold">Suzana Ashotovna</h4>
+                        <p class="text-green-600 font-medium mt-1">Boshlang'ich ta'lim | Pedagog</p>
+                        <p class="text-gray-600 mt-4 text-base leading-relaxed">Bolalar bilan ishlash bo'yicha ko'p yillik tajribaga ega. Farzandingizni maktabga mehr va yuqori professionallik bilan tayyorlaydi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 animate-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Ko'p Beriladigan Savollar</h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Sizni qiziqtirgan savollarga shu yerdan javob toping.</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <details class="faq-item bg-white p-6 rounded-lg border animate-on-scroll">
+                        <summary class="font-semibold text-xl text-gray-900">
+                            Arab tilini noldan necha oyda o'rgansa bo'ladi?
+                            <span class="icon text-green-600 text-2xl">+</span>
+                        </summary>
+                        <div class="answer pt-4 mt-4 border-t text-gray-600 text-base md:text-lg leading-relaxed">
+                           <p>Arab tilini o'rganish bir necha bosqichdan iborat:</p>
+                           <ul class="list-disc list-inside mt-2 space-y-1">
+                                <li><b>1-bosqich (1-3 oy):</b> O'qish, yozishni o'rganish va 150 dan ortiq so'z boyligiga ega bo'lish.</li>
+                                <li><b>2-bosqich (1 yilgacha):</b> Grammatikani mukammal o'zlashtirish, erkin o'qish, yozish, talaffuz va tarjima qobiliyatlarini shakllantirish.</li>
+                                <li><b>3-bosqich (1-2 yil):</b> Xalqaro CEFR imtihonlariga tayyorlanib, B1-C1 darajalarini olish imkoniyati.</li>
+                           </ul>
+                        </div>
+                    </details>
+                    <details class="faq-item bg-white p-6 rounded-lg border animate-on-scroll" style="transition-delay: 100ms;">
+                        <summary class="font-semibold text-xl text-gray-900">
+                           O'g'il bolalarni yosh chegarasi necha yoshgacha?
+                            <span class="icon text-green-600 text-2xl">+</span>
+                        </summary>
+                        <div class="answer pt-4 mt-4 border-t text-gray-600 text-base md:text-lg leading-relaxed">
+                           O'g'il bolalar uchun yosh chegarasi 15 yoshgacha qilib belgilangan. Batafsil ma'lumot uchun markazimizga murojaat qilishingizni so'raymiz.
+                        </div>
+                    </details>
+                    <details class="faq-item bg-white p-6 rounded-lg border animate-on-scroll" style="transition-delay: 200ms;">
+                        <summary class="font-semibold text-xl text-gray-900">
+                            Darsni o'tkazib yuborsam nima bo'ladi?
+                            <span class="icon text-green-600 text-2xl">+</span>
+                        </summary>
+                        <div class="answer pt-4 mt-4 border-t text-gray-600 text-base md:text-lg leading-relaxed">
+                           1-2 marotaba sababli qoldirilgan darslar hisobga olinmaydi va qo'shimcha darslar orqali o'rnini to'ldirish imkoniyati yaratiladi. Agar dars qoldirish 1-2 haftaga cho'zilsa, bu holat hisobga olinadi va to'lov faqat o'quvchi qatnashgan kunlar uchun amalga oshiriladi.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-green-50">
+            <div class="container mx-auto px-6">
+                 <div class="bg-white p-8 rounded-lg shadow-md animate-on-scroll mb-16">
+                     <div class="max-w-2xl mx-auto text-center mb-12">
+                        <h3 class="text-3xl font-bold text-gray-800">Bepul Konsultatsiya Oling</h3>
+                        <p class="text-gray-600 mt-4">Formani to'ldiring, biz siz bilan tez orada bog'lanib, barcha savollaringizga javob beramiz!</p>
+                    </div>
+                    <form id="contact-form" class="max-w-2xl mx-auto space-y-4">
+                        <div>
+                            <label for="name" class="sr-only">Ismingiz</label>
+                            <input type="text" id="name" name="name" placeholder="Ismingiz" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white">
+                             <span id="name-error" class="error-text mt-1 hidden">Iltimos, faqat harflar kiriting.</span>
+                        </div>
+                        <div>
+                            <label for="phone" class="sr-only">Telefon raqamingiz</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Telefon raqamingiz (+998 xx xxx xx xx)" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bg-white">
+                            <span id="phone-error" class="error-text mt-1 hidden">Iltimos, to'g'ri telefon raqam kiriting.</span>
+                        </div>
+                        <div>
+                            <label for="course-select" class="sr-only">Kursni tanlang</label>
+                            <select id="course-select" name="course" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-500 bg-white">
+                                <option>Qiziqtirgan kursni tanlang</option>
+                                <option>Ingliz tili</option>
+                                <option>Rus tili</option>
+                                <option>Arab tili</option>
+                                <option>Maktabga tayyorlov</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full text-white font-bold py-3 px-6 rounded-lg cta-button">
+                            So'rov Yuborish
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Bizning Manzil</h2>
+                    <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Quyidagi xarita orqali bizni oson toping!</p>
+                </div>
+
+                <!-- Map and Info Section -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
+                    <!-- Left Column: Map -->
+                    <div class="md:col-span-3 animate-on-scroll">
+                         <div class="rounded-lg overflow-hidden shadow-xl border border-gray-200 h-full">
+                            <iframe src="https://yandex.uz/map-widget/v1/-/CLa~VKnF" class="w-full min-h-[450px]" style="border:0;" allowfullscreen="true"></iframe>
+                         </div>
+                    </div>
+                
+                    <!-- Right Column: Info -->
+                    <div class="md:col-span-2 animate-on-scroll" style="transition-delay: 150ms;">
+                        <div class="space-y-6 text-left text-gray-700 bg-white p-8 rounded-lg shadow-md border">
+                             <!-- Ish Vaqti -->
+                             <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-lg text-gray-900">Ish vaqti</h4>
+                                    <span class="text-gray-600">Dushanba - Shanba: 08:00 - 17:00</span>
+                                </div>
+                            </div>
+                            <!-- Telefon -->
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                                </div>
+                                 <div>
+                                    <h4 class="font-semibold text-lg text-gray-900">Telefon raqamlar</h4>
+                                    <a href="tel:+998977705704" class="text-gray-600 hover:text-green-700 block font-medium">+998 (97) 770-57-04</a>
+                                    <a href="tel:+998883331384" class="text-gray-600 hover:text-green-700 block">+998 (88) 333-13-84</a>
+                                 </div>
+                            </div>
+                            <!-- Telegram -->
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                    </svg>
+                                </div>
+                                 <div>
+                                    <h4 class="font-semibold text-lg text-gray-900">Telegram Menejer</h4>
+                                    <a href="https://t.me/Assamiy_administrator" target="_blank" class="text-gray-600 hover:text-green-700 block font-medium">@Assamiy_administrator</a>
+                                 </div>
+                            </div>
+                            <!-- Manzil -->
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-green-100 rounded-full text-green-600">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                </div>
+                                 <div>
+                                     <h4 class="font-semibold text-lg text-gray-900">Manzilimiz</h4>
+                                     <span class="text-gray-600">Yangiyo'l shahri, Samarqand ko'chasi, 107-uy</span>
+                                     <span class="block text-sm text-gray-500 mt-1">Mo'ljal: Oqatepa Lavash yaqinida</span>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4"><span class="text-green-400">As-</span>Samiy</h3>
+                    <p class="text-gray-400">Sifatli ta'lim orqali yorqin kelajak.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Sahifalar</h4>
+                    <ul>
+                        <li class="mb-2"><a href="#courses" class="text-gray-400 hover:text-white">Kurslar</a></li>
+                        <li class="mb-2"><a href="#about" class="text-gray-400 hover:text-white">Biz haqimizda</a></li>
+                        <li class="mb-2"><a href="#teachers" class="text-gray-400 hover:text-white">O'qituvchilar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Bog'lanish</h4>
+                    <p class="text-gray-400 mb-2">Yangiyo'l sh., Samarqand ko'chasi, 107-uy</p>
+                    <p class="text-gray-400 mb-2"><a href="tel:+998977705704" class="hover:text-white font-semibold">+998 (97) 770-57-04</a></p>
+                    <p class="text-gray-400 mb-2"><a href="tel:+998883331384" class="hover:text-white">+998 (88) 333-13-84</a></p>
+                     <a href="https://t.me/Assamiy_administrator" target="_blank" class="text-gray-400 hover:text-white">@Assamiy_administrator</a>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Ijtimoiy tarmoqlar</h4>
+                    <div class="space-y-3">
+                        <a href="https://www.instagram.com/as_samiyoquvmarkazi/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-gray-400 hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            <span class="ml-2">Instagram</span>
+                        </a>
+                        <a href="https://t.me/asamiy" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-gray-400 hover:text-white transition-colors">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2z"></path></svg>
+                             <span class="ml-2">Telegram</span>
+                        </a>
+                        <a href="https://www.youtube.com/@ASSAMIYMARKAZI" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-gray-400 hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2A29 29 0 0 0 23 11.75a29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                            <span class="ml-2">YouTube</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500 text-sm">
+                <p>&copy; 2025 As-Samiy O'quv Markazi. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="main-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0">
+        <div id="modal-content" class="modal-content bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto transform scale-95 opacity-0">
+            <!-- Modal content is injected here by JS -->
+        </div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" class="fixed bottom-8 right-8 bg-green-600 hover:bg-green-700 text-white p-3 rounded-full shadow-lg opacity-0 transform translate-y-12 focus:outline-none z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+    </button>
+
+
+    <script>
+        // --- DATA for dynamic content ---
+        const courseDetails = {
+            1: {
+                title: 'Ingliz tili (Batafsil)',
+                content: `
+                    <h4 class="font-bold text-lg mb-2">Kurs kimlar uchun?</h4>
+                    <p class="mb-4">Bu kurs ingliz tilini noldan boshlamoqchi bo'lganlar, maktab o'quvchilari, abituriyentlar va IELTS yoki CEFR imtihonlariga tayyorlanayotganlar uchun mo'ljallangan.</p>
+                    <h4 class="font-bold text-lg mb-2">Bizning ustozlar</h4>
+                    <p>Darslarni CEFR C1 darajasiga ega <b>Anvarova Zarina</b> kabi malakali ustozlar olib boradi.</p>
+                `
+            },
+            2: {
+                title: 'Rus tili (Batafsil)',
+                content: `
+                    <h4 class="font-bold text-lg mb-2">Kurs kimlar uchun?</h4>
+                    <p class="mb-4">Rus tilini endi o'rganishni boshlaganlar va o'z bilimlarini mustahkamlamoqchi bo'lganlar uchun.</p>
+                    <h4 class="font-bold text-lg mb-2">Bizning ustozlar</h4>
+                    <p>Darslarni filolog mutaxassislar <b>Rahmedova Madina</b> va <b>Ergashboyeva Sarvinoz</b> olib borishadi.</p>
+                `
+            },
+            3: {
+                title: 'Arab tili (Batafsil)',
+                content: `
+                    <h4 class="font-bold text-lg mb-2">Kurs kimlar uchun?</h4>
+                    <p class="mb-4">Arab tilini noldan boshlab, Qur'on o'qish yoki zamonaviy adabiy tilda so'zlashishni istaganlar uchun.</p>
+                    <h4 class="font-bold text-lg mb-2">Bizning ustozlar</h4>
+                    <p class="mb-2">Darslar CEFR C1 darajali <b>Jamolxonova Kamola</b>, CEFR B2 darajali <b>Koratayeva Dildora</b> va <b>Xoldorova Muxlisa</b> kabi kuchli ustozlar tomonidan olib boriladi.</p>
+                    <p>Shuningdek, o'quvchilarga B2 va C1 darajadagi yordamchi ustozlar ham ko'maklashishadi.</p>
+                `
+            },
+            4: {
+                title: 'Maktabga tayyorlov (Batafsil)',
+                content: `
+                     <h4 class="font-bold text-lg mb-2">Kurs kimlar uchun?</h4>
+                    <p class="mb-4">5-7 yoshdagi bolajonlarni maktabga har tomonlama tayyorlash uchun mo'ljallangan.</p>
+                    <h4 class="font-bold text-lg mb-2">Bizning ustoz</h4>
+                    <p>Darslarni ko'p yillik tajribaga ega pedagog <b>Suzana Ashotovna</b> olib boradi.</p>
+                `
+            }
+        };
+
+
+        // --- SCRIPT LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+
+            // Scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    } else {
+                        entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+            
+            // --- Universal Modal Logic ---
+            const mainModal = document.getElementById('main-modal');
+            const modalContentEl = document.getElementById('modal-content');
+
+            const openModal = () => {
+                mainModal.classList.remove('hidden');
+                setTimeout(() => {
+                    mainModal.classList.remove('opacity-0');
+                    modalContentEl.classList.remove('opacity-0', 'scale-95');
+                }, 10);
+            };
+
+            const closeModal = () => {
+                modalContentEl.classList.add('opacity-0', 'scale-95');
+                mainModal.classList.add('opacity-0');
+                setTimeout(() => mainModal.classList.add('hidden'), 300);
+            };
+            
+            mainModal.addEventListener('click', (e) => {
+                if (e.target === mainModal || e.target.closest('#close-modal-btn') || e.target.closest('#modal-ok-btn')) {
+                    closeModal();
+                }
+            });
+
+
+            // --- Course Details Modal Logic (now navigates to contact form) ---
+             document.querySelectorAll('.card-button').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                    
+                    const formSection = document.querySelector('#contact > div > div');
+                    formSection.style.transition = 'all 0.3s ease-in-out';
+                    formSection.style.boxShadow = '0 0 25px rgba(22, 163, 74, 0.5)';
+                    setTimeout(() => {
+                         formSection.style.boxShadow = '';
+                    }, 1500);
+                });
+            });
+            
+            // --- Telegram Bot Integration ---
+            const contactForm = document.getElementById('contact-form');
+            const nameInput = document.getElementById('name');
+            const phoneInput = document.getElementById('phone');
+            const nameError = document.getElementById('name-error');
+            const phoneError = document.getElementById('phone-error');
+
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                let isValid = true;
+                
+                nameInput.classList.remove('form-error');
+                nameError.classList.add('hidden');
+                phoneInput.classList.remove('form-error');
+                phoneError.classList.add('hidden');
+
+                const nameValue = nameInput.value.trim();
+                if (!/^[a-zA-Z\s'\u0400-\u04FF]+$/.test(nameValue)) {
+                    nameInput.classList.add('form-error');
+                    nameError.classList.remove('hidden');
+                    isValid = false;
+                }
+
+                const phoneValue = phoneInput.value.trim();
+                if (!/^[0-9\s\(\)\-+]+$/.test(phoneValue) || phoneValue.length < 9) {
+                    phoneInput.classList.add('form-error');
+                    phoneError.classList.remove('hidden');
+                    isValid = false;
+                }
+                
+                if (!isValid) return;
+
+                const form = e.target;
+                const course = form.course.value;
+                
+                const botToken = '8403910007:AAEYEN9FecBONXzVSn8OXZp535YorZXf308';
+                const chatId = '-1002970874555';
+                
+                let message = `<b>🔔 Yangi So'rov!</b>\n\n`;
+                message += `<b>👤 Ism:</b> ${nameValue}\n`;
+                message += `<b>📞 Telefon:</b> ${phoneValue}\n`;
+                message += `<b>📚 Kurs:</b> ${course}`;
+
+                const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=html`;
+                
+                const submitButton = form.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+                submitButton.innerHTML = 'Yuborilmoqda...';
+                submitButton.disabled = true;
+
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    if(data.ok) {
+                        form.reset();
+                        modalContentEl.innerHTML = `
+                         <div class="text-center p-4">
+                            <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-5">
+                                <svg class="h-12 w-12 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </div>
+                            <h3 class="text-3xl leading-6 font-bold text-gray-900">Muvaffaqiyatli!</h3>
+                            <div class="mt-4 py-3">
+                                <p class="text-xl text-gray-600">So'rovingiz qabul qilindi.</p>
+                                <p class="text-sm text-gray-500 mt-2">Tez orada menejerlarimiz siz bilan bog'lanishadi.</p>
+                            </div>
+                            <div class="items-center px-4 py-4">
+                                <button id="modal-ok-btn" class="px-8 py-3 bg-green-600 text-white text-lg font-semibold rounded-lg w-full shadow-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300">
+                                    Ajoyib!
+                                </button>
+                            </div>
+                        </div>`;
+                        openModal();
+                    } else {
+                        throw new Error('Telegramga yuborishda xatolik.');
+                    }
+                } catch (error) {
+                    console.error('Telegram error:', error);
+                    modalContentEl.innerHTML = `
+                        <div class="text-center p-6">
+                            <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-red-100 mb-5">
+                                <svg class="h-12 w-12 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+                            </div>
+                            <h3 class="text-3xl leading-6 font-bold text-gray-900">Xatolik Yuz Berdi!</h3>
+                            <div class="mt-4 py-3">
+                                <p class="text-xl text-gray-600">So'rovni yuborishda xatolik yuz berdi.</p>
+                                 <p class="text-sm text-gray-500 mt-2">Iltimos, keyinroq qayta urinib ko'ring yoki bizga qo'ng'iroq qiling.</p>
+                            </div>
+                            <div class="items-center px-4 py-4">
+                                <button id="modal-ok-btn" class="px-8 py-3 bg-red-600 text-white text-lg font-semibold rounded-lg w-full shadow-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-300">
+                                    Tushunarli
+                                </button>
+                            </div>
+                        </div>`;
+                    openModal();
+                } finally {
+                    submitButton.innerHTML = originalButtonText;
+                    submitButton.disabled = false;
+                }
+            });
+
+            // --- Back to Top Button Logic ---
+            const backToTopBtn = document.getElementById('back-to-top-btn');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'translate-y-12');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'translate-y-12');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
+
+
